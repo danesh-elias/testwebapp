@@ -1,0 +1,28 @@
+version: '2'
+services:
+  mysql1:
+        image: mysql:8.0
+        container_name: mysql-80
+        command: --default-authentication-plugin=mysql_native_password
+#        working_dir: /application
+        volumes:
+          - ./src/xswrandom-12:/docker-entrypoint-initdb.d
+        restart: always
+        environment:
+          - MYSQL_ROOT_PASSWORD=I@mgr00t
+          - MYSQL_DATABASE=csoctrain
+          - MYSQL_USER=db_user
+          - MYSQL_PASSWORD=.mypwd
+        ports:
+          - "8083:3306"
+  website1:
+    container_name: sensitive_data
+    build:
+      context: ./
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - 7000:80
+    depends_on:
+      - mysql1
+
