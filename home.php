@@ -1,7 +1,6 @@
 <?php
 ob_start();
 session_start();
-include("db_config.php");
 if (!$_SESSION["username"]) {
     header('Location:login.php?msg=1');
 }

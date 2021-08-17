@@ -1,7 +1,6 @@
 <?php
 ob_start();
 session_start();
-// include("db_config.php");
 ini_set('display_errors', 1);
 ?>
 
@@ -53,8 +52,6 @@ ini_set('display_errors', 1);
 				// Escape special characters, if any
 				$username = mysqli_real_escape_string($con, $_POST['uid']);
 				$pass = mysqli_real_escape_string($con, $_POST['password']);
-
-				// $sql = "INSERT INTO Persons (FirstName, LastName, Age) VALUES ('$firstname', '$lastname', '$age')";
 				$sql = "SELECT * FROM users where username='" . $username . "' AND password = '" . md5($pass) . "'";
 
 				if (!mysqli_query($con, $sql)) {
